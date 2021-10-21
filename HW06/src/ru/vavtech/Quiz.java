@@ -63,5 +63,6 @@ public class Quiz {
         } else {
             System.out.println("Ну и зря! Всего доброго.");
         }
+        scanner.close();
     }
 }
