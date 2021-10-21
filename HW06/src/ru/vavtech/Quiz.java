@@ -41,12 +41,16 @@ public class Quiz {
                         System.out.println(answer);
                     }
                     System.out.println("Введите номер вашего варианта ответа:");
-                    int userAnswer = scanner.nextInt();
-                    System.out.println("Вы ввели: " + userAnswer);
-                    if (userAnswer == RIGHT_ANSWERS[i]) {
-                        count++;
+                    char userAnswer = scanner.next().charAt(0);
+                    if (Character.isDigit(userAnswer)) {
+                        System.out.println("Вы ввели: " + userAnswer);
+                        if (userAnswer == RIGHT_ANSWERS[i]) {
+                            count++;
+                        }
+                        System.out.println("================================\n");
+                    } else {
+                        System.out.println("Можно вводить только цифры! Ответ не защитан.");
                     }
-                    System.out.println("================================\n");
                 }
                 System.out.println("Поздравляем! Количество правильных ответов: " + count + "\n");
                 System.out.println("Желаете повторить?(Y/n)");
