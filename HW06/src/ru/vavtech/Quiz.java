@@ -18,7 +18,7 @@ public class Quiz {
     };
 
     //Массив с номерами правильных ответов
-    private static final int[] RIGHT_ANSWERS = {1, 4, 4};
+    private static final char[] RIGHT_ANSWERS = {'1', '4', '4'};
 
     // Переменная для хранения счета пользователя
     private static int count = 0;
@@ -44,7 +44,7 @@ public class Quiz {
                     char userAnswer = scanner.next().charAt(0);
                     if (Character.isDigit(userAnswer)) {
                         System.out.println("Вы ввели: " + userAnswer);
-                        if (userAnswer == RIGHT_ANSWERS[i]) {
+                        if (RIGHT_ANSWERS[i]==userAnswer) {
                             count++;
                         }
                         System.out.println("================================\n");
