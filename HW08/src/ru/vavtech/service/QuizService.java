@@ -55,7 +55,10 @@ public class QuizService {
                     break;
                 }
             }
+        } else {
+            System.out.println("Ну и зря! Всего доброго.");
         }
+        scanner.close();
     }
 
     /**
@@ -72,7 +75,7 @@ public class QuizService {
             }
         }
         System.out.println("Вы ввели: " + userAnswer);
-        if (question.getAnswers().get(Integer.parseInt(userAnswer)-1).isRight()) {
+        if (question.getAnswers().get(Integer.parseInt(userAnswer) - 1).isRight()) {
             count++;
         }
         System.out.println("================================\n");
