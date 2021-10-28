@@ -71,6 +71,7 @@ public class QuizService {
         for (char c : userAnswer.toCharArray()) {
             if (!Character.isDigit(c)) {
                 System.out.println("Можно вводить только цифры! Ответ не защитан.");
+                System.out.println("================================\n");
                 return;
             }
         }
