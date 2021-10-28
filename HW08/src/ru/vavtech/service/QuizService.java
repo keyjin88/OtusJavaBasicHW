@@ -15,7 +15,7 @@ public class QuizService {
     // Вопросы
     private final List<Question> questions;
     // Переменная для хранения счета пользователя
-    private static int count = 0;
+    private int count = 0;
 
     public QuizService() {
         questions = QuestionService.getQuestionsList();
