@@ -34,14 +34,14 @@ public class QuizService {
         if (scanner.nextLine().equalsIgnoreCase("Y")) {
             while (true) {
                 for (Question question : questions) {
-                    int questionCounter = 1;
                     System.out.println(question.getText());
                     System.out.println("Варианты ответа:");
+                    int answerNumber = 1;
                     for (Answer answer : question.getAnswers()) {
                         System.out.println(
-                                MessageFormat.format("{0}. {1}", questionCounter, answer.getText()
+                                MessageFormat.format("{0}. {1}", answerNumber, answer.getText()
                                 ));
-                        questionCounter++;
+                        answerNumber++;
                     }
                     System.out.println("Введите номер вашего варианта ответа:");
                     String userAnswer = scanner.next();
