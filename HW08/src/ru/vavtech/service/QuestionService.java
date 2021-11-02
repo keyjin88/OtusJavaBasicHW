@@ -12,43 +12,39 @@ import java.util.List;
 public class QuestionService {
     /**
      * Метод возвращает заполненный список с вопросами
+     *
      * @return список вопросов
      */
     public static List<Question> getQuestionsList() {
         List<Question> questions = new ArrayList<>();
         questions.add(new Question(
-                "Сколько будет 1+1?",
-                new ArrayList<>() {
-                    {
-                        add(new Answer("2.", true));
-                        add(new Answer("Смотря в какой системе счисления.", false));
-                        add(new Answer("1 - я люблю JavaScript!", false));
-                    }
-                }
-        ));
+                        "Сколько будет 1+1?",
+                        List.of(new Answer("2.", true),
+                                new Answer("Смотря в какой системе счисления.", false),
+                                new Answer("1 - я люблю JavaScript!", false)
+                        )
+                )
+        );
         questions.add(new Question(
-                "Как зовут глухого кролика?",
-                new ArrayList<>() {
-                    {
-                        add(new Answer("Банни.", false));
-                        add(new Answer("Роджер.", false));
-                        add(new Answer("Эй ты!", false));
-                        add(new Answer("КРООООЛИК!!!!", true));
-                    }
-                }
-        ));
+                        "Как зовут глухого кролика?",
+                        List.of(
+                                new Answer("Банни.", false),
+                                new Answer("Роджер.", false),
+                                new Answer("Эй ты!", false),
+                                new Answer("КРООООЛИК!!!!", true)
+                        )
+                )
+        );
         questions.add(new Question(
-                "Windows must die?",
-                new ArrayList<>() {
-                    {
-                        add(new Answer("Да.", false));
-                        add(new Answer("Да!!!", false));
-                        add(new Answer("Yes!", false));
-                        add(new Answer("Да но XP был неплох.", true));
-                    }
-                }
-        ));
+                        "Windows must die?",
+                        List.of(
+                                new Answer("Да.", false),
+                                new Answer("Да!!!", false),
+                                new Answer("Yes!", false),
+                                new Answer("Да но XP был неплох.", true)
+                        )
+                )
+        );
         return questions;
     }
-
 }

@@ -1,15 +1,10 @@
 package ru.vavtech.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.List;
 
 /**
  * Класс для описания вопроса
  */
-@Data
-@AllArgsConstructor
 public class Question {
     /**
      * Текст вопроса
@@ -19,4 +14,17 @@ public class Question {
      * Список ответов на данный вопрос
      */
     private List<Answer> answers;
+
+    public Question(String text, List<Answer> answers) {
+        this.text = text;
+        this.answers = answers;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
 }

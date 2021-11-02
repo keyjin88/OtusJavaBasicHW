@@ -1,13 +1,8 @@
 package ru.vavtech.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 /**
  * Класс для описания ответа на вопрос
  */
-@Data
-@AllArgsConstructor
 public class Answer {
     /**
      * Текст вопроса
@@ -17,4 +12,17 @@ public class Answer {
      * Флаг говорящий нам, что ответ является верным
      */
     private boolean isRight;
+
+    public Answer(String text, boolean isRight) {
+        this.text = text;
+        this.isRight = isRight;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public boolean isRight() {
+        return isRight;
+    }
 }
