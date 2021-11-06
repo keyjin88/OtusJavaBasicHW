@@ -13,6 +13,7 @@ public class Timer {
      */
     public void getTimings(String algorithmName, Sorting sortAlgorithm, List<Integer> unorderedList) {
         var startTime = System.nanoTime();
+        var result = sortAlgorithm.sort(unorderedList);
         var duration = (System.nanoTime() - startTime) / 1000;
         System.out.println(MessageFormat.format(
                 "{0}. \nВремя выполнения: {1} микросекунд.", algorithmName, duration));
