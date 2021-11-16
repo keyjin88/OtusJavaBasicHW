@@ -19,7 +19,7 @@ public class BankApp {
         alexander.addAccount(alexAccount1);
         alexander.addAccount(alexAccount2);
 
-        Client pavel = new Client(1L, "Alex", 33);
+        Client pavel = new Client(2L, "Alex", 33);
         Account pavelAccount1 = new Account(3L, new BigDecimal("15000"));
         pavel.addAccount(pavelAccount1);
 
