@@ -1,17 +1,17 @@
 package ru.vavtech.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Сервис по проведению платежных операций
  */
 public class BankService {
-    private final List<Client> clientList;
+    private final Set<Client> clientList;
 
     public BankService() {
-        clientList = new ArrayList<>();
+        clientList = new TreeSet<>();
     }
 
     /**

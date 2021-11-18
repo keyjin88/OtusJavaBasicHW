@@ -1,21 +1,21 @@
 package ru.vavtech.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Клиент банка
  */
-public class Client {
+public class Client implements Comparable<Client> {
     /**
      * Список счетов клиента
      */
-    private final List<Account> accountList;
+    private final Set<Account> accountList;
     /**
      * ID клиента
      */
-    private long id;
+    private Long id;
     /**
      * Имя клиента
      */
@@ -29,7 +29,7 @@ public class Client {
         this.id = id;
         this.name = name;
         this.age = age;
-        accountList = new ArrayList<>();
+        accountList = new TreeSet<>();
     }
 
     public long getId() {
@@ -56,7 +56,7 @@ public class Client {
         this.age = age;
     }
 
-    public List<Account> getAccountList() {
+    public Set<Account> getAccountList() {
         return accountList;
     }
 
@@ -69,11 +69,16 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return id == client.id && age == client.age && Objects.equals(name, client.name) && Objects.equals(accountList, client.accountList);
+        return Objects.equals(id, client.id) && age == client.age && Objects.equals(name, client.name) && Objects.equals(accountList, client.accountList);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, age, accountList);
+    }
+
+    @Override
+    public int compareTo(Client client) {
+        return id.compareTo(client.getId());
     }
 }

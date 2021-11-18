@@ -6,11 +6,11 @@ import java.util.Objects;
 /**
  * Счет клиента
  */
-public class Account {
+public class Account implements Comparable<Account> {
     /**
      * ID сета
      */
-    private long id;
+    private Long id;
 
     /**
      * Сумма на счету
@@ -43,11 +43,16 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return id == account.id && Objects.equals(amount, account.amount);
+        return Objects.equals(id, account.id) && Objects.equals(amount, account.amount);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, amount);
+    }
+
+    @Override
+    public int compareTo(Account account) {
+        return id.compareTo(account.getId());
     }
 }
