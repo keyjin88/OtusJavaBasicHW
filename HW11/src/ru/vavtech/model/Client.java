@@ -1,8 +1,8 @@
 package ru.vavtech.model;
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 /**
  * Клиент банка
@@ -11,7 +11,7 @@ public class Client implements Comparable<Client> {
     /**
      * Список счетов клиента
      */
-    private final Set<Account> accountList;
+    private final Map<Long, Account> accountList;
     /**
      * ID клиента
      */
@@ -29,7 +29,7 @@ public class Client implements Comparable<Client> {
         this.id = id;
         this.name = name;
         this.age = age;
-        accountList = new TreeSet<>();
+        accountList = new TreeMap<>();
     }
 
     public long getId() {
@@ -56,12 +56,16 @@ public class Client implements Comparable<Client> {
         this.age = age;
     }
 
-    public Set<Account> getAccountList() {
+    public Map<Long, Account> getAccountList() {
         return accountList;
     }
 
     public void addAccount(Account account) {
-        accountList.add(account);
+        accountList.put(account.getId(), account);
+    }
+
+    public Account getAccount(Long accountId) {
+        return accountList.get(accountId);
     }
 
     @Override

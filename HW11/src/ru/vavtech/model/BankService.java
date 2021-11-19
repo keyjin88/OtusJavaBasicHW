@@ -1,17 +1,17 @@
 package ru.vavtech.model;
 
 import java.math.BigDecimal;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Сервис по проведению платежных операций
  */
 public class BankService {
-    private final Set<Client> clientList;
+    private final Map<Long, Client> clientList;
 
     public BankService() {
-        clientList = new TreeSet<>();
+        clientList = new TreeMap<>();
     }
 
     /**
@@ -19,7 +19,7 @@ public class BankService {
      * @param client клиент
      */
     public void addClient(Client client) {
-        clientList.add(client);
+        clientList.put(client.getId(), client);
     }
 
     /**
@@ -28,10 +28,10 @@ public class BankService {
      * @return ифнормацию о клиенте
      */
     public Client findPerson(Account account) {
-        return clientList.stream()
-                .filter(client -> client.getAccountList().contains(account))
+        return clientList.entrySet().stream()
+                .filter(entry -> entry.getValue().getAccount(account.getId()) != null)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(IllegalArgumentException::new).getValue();
     }
 
     /**
