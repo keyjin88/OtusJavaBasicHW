@@ -28,10 +28,10 @@ public class BankService {
      * @return ифнормацию о клиенте
      */
     public Client findPerson(Account account) {
-        return clientList.entrySet().stream()
-                .filter(entry -> entry.getValue().getAccount(account.getId()) != null)
+        return clientList.values().stream()
+                .filter(client -> client.getAccount(account.getId()) != null)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new).getValue();
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     /**
