@@ -18,20 +18,17 @@ public class BankService {
      * Добавляет клиента в список клиентов банка
      * @param client клиент
      */
-    public void addClient(Client client) {
-        clientList.put(client.getId(), client);
+    public void addClientAccount(Long accountId, Client client) {
+        clientList.put(accountId, client);
     }
 
     /**
      * Ищет клиента по его счету среди всех клиентов банка
-     * @param account счет клиента
+     * @param accountId id счета клиента
      * @return ифнормацию о клиенте
      */
-    public Client findPerson(Account account) {
-        return clientList.values().stream()
-                .filter(client -> client.getAccount(account.getId()) != null)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+    public Client findPerson(Long accountId) {
+        return clientList.get(accountId);
     }
 
     /**
@@ -42,7 +39,7 @@ public class BankService {
      * @return {@code true} если транзакция завершена успешно или {@code false}, если перевод не удался
      */
     public boolean transfer(Account from, Account to, BigDecimal amount) {
-        var personFrom = findPerson(from);
+        var personFrom = findPerson(from.getId());
         if (!checkAge(personFrom)) {
             System.out.println("Перевод со счета пользователя запрещен.\n" +
                     "Золотом можно распоряжаться только с 18-ти лет");

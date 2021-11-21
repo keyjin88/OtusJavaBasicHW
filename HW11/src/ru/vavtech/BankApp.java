@@ -17,6 +17,7 @@ public class BankApp {
         Account alexAccount1 = new Account(1L, new BigDecimal("10000"));
         Account alexAccount2 = new Account(2L, new BigDecimal("3000"));
         alexander.addAccount(alexAccount1);
+
         alexander.addAccount(alexAccount2);
 
         Client pavel = new Client(2L, "Alex", 33);
@@ -24,11 +25,13 @@ public class BankApp {
         pavel.addAccount(pavelAccount1);
 
         //Подгружаем пользователей в банк
-        bankService.addClient(alexander);
-        bankService.addClient(pavel);
+        bankService.addClientAccount(alexAccount1.getId(), alexander);
+        bankService.addClientAccount(alexAccount2.getId(), alexander);
+        bankService.addClientAccount(pavelAccount1.getId(), pavel);
 
         //Пробуем найти пользователя по его счету
-        System.out.println(bankService.findPerson(alexAccount2).getName());
+        var person = bankService.findPerson(alexAccount2.getId());
+        System.out.println(person.getName());
 
         //Проводим переводы до тех пор пока не кончатся деньги на счете
         bankService.transfer(pavelAccount1, alexAccount2, new BigDecimal("5000"));
