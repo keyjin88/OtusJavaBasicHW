@@ -1,17 +1,11 @@
 package ru.vavtech.model;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Клиент банка
  */
 public class Client implements Comparable<Client> {
-    /**
-     * Список счетов клиента
-     */
-    private final Set<Account> accountList;
     /**
      * ID клиента
      */
@@ -29,7 +23,6 @@ public class Client implements Comparable<Client> {
         this.id = id;
         this.name = name;
         this.age = age;
-        accountList = new HashSet<>();
     }
 
     public long getId() {
@@ -56,33 +49,17 @@ public class Client implements Comparable<Client> {
         this.age = age;
     }
 
-    public Set<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void addAccount(Account account) {
-        accountList.add(account);
-    }
-
-    public Account getAccount(Long accountId) {
-        return accountList
-                .stream()
-                .filter(account -> account.getId() == accountId)
-                .findFirst()
-                .orElse(null);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id) && age == client.age && Objects.equals(name, client.name) && Objects.equals(accountList, client.accountList);
+        return Objects.equals(id, client.id) && age == client.age && Objects.equals(name, client.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age, accountList);
+        return Objects.hash(id, name, age);
     }
 
     @Override

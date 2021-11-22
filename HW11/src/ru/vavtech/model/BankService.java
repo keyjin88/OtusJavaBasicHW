@@ -1,6 +1,8 @@
 package ru.vavtech.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,10 +10,12 @@ import java.util.TreeMap;
  * Сервис по проведению платежных операций
  */
 public class BankService {
-    private final Map<Long, Client> clientList;
+    private final Map<Long, Client> clientMap;
+    private final Map<Long, List<Account>> accountMap;
 
     public BankService() {
-        clientList = new TreeMap<>();
+        clientMap = new TreeMap<>();
+        accountMap = new TreeMap<>();
     }
 
     /**
@@ -19,7 +23,31 @@ public class BankService {
      * @param client клиент
      */
     public void addClientAccount(Long accountId, Client client) {
-        clientList.put(accountId, client);
+        clientMap.put(accountId, client);
+    }
+
+    /**
+     * Добавляет счет в список всех счетов по ключу id клиента, к которому счет относится
+     * @param clientId идентефикатор клиента
+     * @param account  счет
+     */
+    public void addAccount(Long clientId, Account account) {
+        if (accountMap.get(clientId) == null) {
+            var accountList = new ArrayList<Account>();
+            accountList.add(account);
+            accountMap.put(clientId, accountList);
+        } else {
+            accountMap.get(clientId).add(account);
+        }
+    }
+
+    /**
+     * Возвращает все счета клиента
+     * @param clientId идентефикатор клиента
+     * @return список счетов клиента
+     */
+    public List<Account> getAccountsByClientId(Long clientId) {
+        return accountMap.get(clientId);
     }
 
     /**
@@ -28,7 +56,7 @@ public class BankService {
      * @return ифнормацию о клиенте
      */
     public Client findPerson(Long accountId) {
-        return clientList.get(accountId);
+        return clientMap.get(accountId);
     }
 
     /**

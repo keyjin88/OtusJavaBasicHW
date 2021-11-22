@@ -16,18 +16,18 @@ public class BankApp {
         Client alexander = new Client(1L, "Alex", 17);
         Account alexAccount1 = new Account(1L, new BigDecimal("10000"));
         Account alexAccount2 = new Account(2L, new BigDecimal("3000"));
-        alexander.addAccount(alexAccount1);
-
-        alexander.addAccount(alexAccount2);
 
         Client pavel = new Client(2L, "Alex", 33);
         Account pavelAccount1 = new Account(3L, new BigDecimal("15000"));
-        pavel.addAccount(pavelAccount1);
 
-        //Подгружаем пользователей в банк
+        //Подгружаем пользователей и счета в банк
         bankService.addClientAccount(alexAccount1.getId(), alexander);
         bankService.addClientAccount(alexAccount2.getId(), alexander);
         bankService.addClientAccount(pavelAccount1.getId(), pavel);
+
+        bankService.addAccount(alexander.getId(), alexAccount1);
+        bankService.addAccount(alexander.getId(), alexAccount2);
+        bankService.addAccount(pavel.getId(), pavelAccount1);
 
         //Пробуем найти пользователя по его счету
         var person = bankService.findPerson(alexAccount2.getId());
