@@ -16,9 +16,12 @@ public class BankApp {
         Client alexander = new Client(1L, "Alex", 17);
         Account alexAccount1 = new Account(1L, new BigDecimal("10000"));
         Account alexAccount2 = new Account(2L, new BigDecimal("3000"));
+        alexander.addAccount(alexAccount1);
+        alexander.addAccount(alexAccount2);
 
         Client pavel = new Client(2L, "Alex", 33);
         Account pavelAccount1 = new Account(3L, new BigDecimal("15000"));
+        pavel.addAccount(pavelAccount1);
 
         //Подгружаем пользователей и счета в банк
         bankService.addClientAccount(alexAccount1.getId(), alexander);
@@ -29,8 +32,11 @@ public class BankApp {
         bankService.addAccount(alexander.getId(), alexAccount2);
         bankService.addAccount(pavel.getId(), pavelAccount1);
 
+        bankService.addClient(alexander.getId(), alexander);
+        bankService.addClient(pavel.getId(), pavel);
+
         //Пробуем найти пользователя по его счету
-        var person = bankService.findPerson(alexAccount2.getId());
+        var person = bankService.findPersonByAccountId(alexAccount2.getId());
         System.out.println(person.getName());
 
         //Проводим переводы до тех пор пока не кончатся деньги на счете
@@ -41,5 +47,9 @@ public class BankApp {
 
         //Проверяем работоспособность ограничения по возрасту
         bankService.transfer(alexAccount2, pavelAccount1, new BigDecimal("3000"));
+
+        //Получение всех счетов пользователя по его id
+        var accounts = bankService.findPersonByClientId(1L).getAccountList();
+        System.out.println(accounts);
     }
 }

@@ -1,21 +1,20 @@
 package ru.vavtech.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Сервис по проведению платежных операций
  */
 public class BankService {
+    private final Map<Long, Client> accountClientMap;
     private final Map<Long, Client> clientMap;
     private final Map<Long, List<Account>> accountMap;
 
     public BankService() {
-        clientMap = new TreeMap<>();
+        accountClientMap = new TreeMap<>();
         accountMap = new TreeMap<>();
+        clientMap = new HashMap<>();
     }
 
     /**
@@ -23,7 +22,16 @@ public class BankService {
      * @param client клиент
      */
     public void addClientAccount(Long accountId, Client client) {
-        clientMap.put(accountId, client);
+        accountClientMap.put(accountId, client);
+    }
+
+    /**
+     * Добавление клиента в список клиентов
+     * @param clientId идентефикатор клиента
+     * @param client   клиент
+     */
+    public void addClient(Long clientId, Client client) {
+        clientMap.put(clientId, client);
     }
 
     /**
@@ -55,8 +63,17 @@ public class BankService {
      * @param accountId id счета клиента
      * @return ифнормацию о клиенте
      */
-    public Client findPerson(Long accountId) {
-        return clientMap.get(accountId);
+    public Client findPersonByAccountId(Long accountId) {
+        return accountClientMap.get(accountId);
+    }
+
+    /**
+     * Ищет клиента по его id
+     * @param clientId id клиента
+     * @return клиента
+     */
+    public Client findPersonByClientId(Long clientId) {
+        return clientMap.get(clientId);
     }
 
     /**
@@ -67,7 +84,7 @@ public class BankService {
      * @return {@code true} если транзакция завершена успешно или {@code false}, если перевод не удался
      */
     public boolean transfer(Account from, Account to, BigDecimal amount) {
-        var personFrom = findPerson(from.getId());
+        var personFrom = findPersonByAccountId(from.getId());
         if (!checkAge(personFrom)) {
             System.out.println("Перевод со счета пользователя запрещен.\n" +
                     "Золотом можно распоряжаться только с 18-ти лет");

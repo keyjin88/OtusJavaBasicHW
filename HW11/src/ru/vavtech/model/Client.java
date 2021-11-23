@@ -1,11 +1,16 @@
 package ru.vavtech.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Клиент банка
  */
 public class Client implements Comparable<Client> {
+
+    private List<Account> accountList;
+
     /**
      * ID клиента
      */
@@ -23,6 +28,7 @@ public class Client implements Comparable<Client> {
         this.id = id;
         this.name = name;
         this.age = age;
+        accountList = new ArrayList<>();
     }
 
     public long getId() {
@@ -47,6 +53,14 @@ public class Client implements Comparable<Client> {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void addAccount(Account account) {
+        accountList.add(account);
     }
 
     @Override
